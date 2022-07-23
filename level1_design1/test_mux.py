@@ -8,7 +8,7 @@ import random
 async def test_mux(dut):
     """Test for mux2"""
     cocotb.log.info('##### CTB: Develop your test here ########')
-    in_val = [1,2,3,0,0,1,2,2,0,3,1,2,3,1,1,2,3,0,1,0,3,2,0,1,0,2,0,1,1,2,3]
+    in_val = [1,2,3,0,0,1,2,2,0,3,1,2,3,1,1,2,3,0,1,0,3,2,0,1,0,2,0,1,1,2,2]
     select = 12
 
     # input driving
