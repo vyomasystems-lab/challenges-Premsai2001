@@ -54,9 +54,12 @@ async def test_mux(dut):
    
 @cocotb.test()
 async def randomized_test_mux(dut):
-    for i in range(5):
-        in_val = random.randint(4,size=(31))
-        select = random.randint(0,30)
+    for j in range(5):
+        in_val = []
+        for i in range(31):
+            x = random.randint(0,3)
+            in_val.append(x)
+        select = random.randint(0,31)
 
         dut.inp0.value = in_val[0]
         dut.inp1.value = in_val[1]
@@ -93,6 +96,8 @@ async def randomized_test_mux(dut):
 
         await Timer(2, units='ns')
         
-        dut._log.info(f'A={A:05} B={B:05} model={A+B:05} DUT={int(dut.sum.value):05}')
-        assert dut.sum.value == A+B, "Randomised test failed with: {A} + {B} = {SUM}".format(
-            A=dut.a.value, B=dut.b.value, SUM=dut.sum.value)
+       # dut._log.info(f'A={A:05} B={B:05} model={A+B:05} DUT={int(dut.sum.value):05}')
+        for i in range(31):
+            if select==i :
+             assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out = {OUT}, but expected value = {exp}".format(
+                 i = int(i), OUT=int(dut.out.value), exp = int(in_val[i]))
