@@ -82,4 +82,4 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
     endcase
   end
 ```
-For the adder design, the logic should be ``a + b`` instead of ``a - b`` as in the design code.
+For the MUX design, the case statement for ``sel = 5'b01100: out = inp12`` is missing in the design code.
