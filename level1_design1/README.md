@@ -59,7 +59,7 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
       5'b01001: out = inp9;  
       5'b01010: out = inp10;
       5'b01011: out = inp11;
-      // missing 5'b01100: out = inp12; 
+      // missing 5'b01100: out = inp12;  ===> BUG
       5'b01101: out = inp12;
       5'b01101: out = inp13;
       5'b01110: out = inp14;
