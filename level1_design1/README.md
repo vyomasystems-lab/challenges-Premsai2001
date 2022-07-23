@@ -37,6 +37,10 @@ assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out
 - Expected Output: out = 3
 - Observed Output in the DUT dut.out=0
 
+- Test Inputs: in_val = [1, 2, 3, 0, 0, 1, 2, 2, 0, 3, 1, 2, 3, 1, 1, 2, 3, 0, 1, 0, 3, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2]; select = 30
+- Expected Output: out = 2
+- Observed Output in the DUT dut.out=0
+
 Output mismatches for the above inputs proving that there is a design bug
 
 ## Design Bug
