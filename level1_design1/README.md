@@ -59,8 +59,7 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
       5'b01001: out = inp9;  
       5'b01010: out = inp10;
       5'b01011: out = inp11;
-      // missing 5'b01100: out = inp12;  ===> BUG
-      5'b01101: out = inp12;
+      5'b01101: out = inp12; ===> BUG
       5'b01101: out = inp13;
       5'b01110: out = inp14;
       5'b01111: out = inp15;
@@ -82,4 +81,16 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
     endcase
   end
 ```
-For the MUX design, the case statement for ``sel = 5'b01100: out = inp12`` is missing in the design code.
+For the MUX design, the case statement for ``sel = 12`` should be ``5'b01100: out = inp12`` instead of ``5'b01101: out = inp12`` in the design code.
+
+## Design Fix
+Updating the design and re-running the test makes the test pass.
+
+
+
+The updated design is checked in as mux_fix.v
+
+## Verification Strategy
+
+## Is the verification complete ?
+
