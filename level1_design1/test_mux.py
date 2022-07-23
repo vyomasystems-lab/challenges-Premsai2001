@@ -59,7 +59,9 @@ async def randomized_test_mux(dut):
         for i in range(31):
             x = random.randint(0,3)
             in_val.append(x)
-        select = random.randint(0,31)
+        print(in_val)
+        select = random.randint(0,30)
+        print(select)
 
         dut.inp0.value = in_val[0]
         dut.inp1.value = in_val[1]
