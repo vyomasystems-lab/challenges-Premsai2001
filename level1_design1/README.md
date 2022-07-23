@@ -77,12 +77,15 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
       5'b11011: out = inp27;
       5'b11100: out = inp28;
       5'b11101: out = inp29;
+      ======================> BUG: missing CASE
       default: out = 0;
     endcase
   end
 ```
-For the MUX design, the case statement for ``sel = 12`` should be ``5'b01100: out = inp12`` instead of ``5'b01101: out = inp12`` in the design code.
-
+For the MUX design, 
+- the case statement for ``sel = 12`` should be ``5'b01100: out = inp12`` instead of ``5'b01101: out = inp12`` in the design code.
+- the case statement for ``sel = 30`` i.e ``5'b11110: out = inp30`` is missing in the design code.
+- 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
 
