@@ -23,13 +23,17 @@ The values are assigned to the input ports as an array using
 
 The assert statement is used for comparing the multiplexer's outut to the expected value.
 
-The following error is seen:
+The following errors are seen:
 ```
 assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out = {OUT}, but expected value = {exp}".format(
                      AssertionError: MUX result is incorrect: For sel = 12 , out = 0, but expected value = 3
 ```
+```
+ assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out = {OUT}, but expected value = {exp}".format(
+                     AssertionError: MUX result is incorrect: For sel = 30 , out = 0, but expected value = 2
+```
 ## Test Scenario
-- Test Inputs: in_val = [1, 2, 3, 0, 0, 1, 2, 2, 0, 3, 1, 2, 3, 1, 1, 2, 3, 0, 1, 0, 3, 2, 0, 1, 0, 2, 0, 1, 1, 2, 3]; select = 12
+- Test Inputs: in_val = [1, 2, 3, 0, 0, 1, 2, 2, 0, 3, 1, 2, 3, 1, 1, 2, 3, 0, 1, 0, 3, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2]; select = 12
 - Expected Output: out = 3
 - Observed Output in the DUT dut.out=0
 
@@ -89,7 +93,7 @@ For the MUX design,
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
 
-
+![image](https://user-images.githubusercontent.com/80892311/180613114-a5a5fac8-9a4d-46a9-b098-9884c0005bf8.png)
 
 The updated design is checked in as mux_fix.v
 
