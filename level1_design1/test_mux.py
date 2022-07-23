@@ -77,5 +77,5 @@ async def test_mux(dut):
 
     await Timer(2, units='ns')
     
-    assert dut.out.value == A+B, "Adder result is incorrect: {A} + {B} != {SUM}, expected value={EXP}".format(
-            A=int(dut.a.value), B=int(dut.b.value), SUM=int(dut.sum.value), EXP=A+B)
+    assert dut.out.value == in12, "MUX result is incorrect: For sel = {select} , out = {OUT}, but expected value = {3}".format(
+            select=int(dut.sel.value), OUT=int(dut.out.value))
