@@ -90,7 +90,7 @@ case(current_state)
   end
 ```
 For the 1011 Sequence detector design,
-- due to the state transition to IDLE during ``inp_bit=0` for both the cases of ``SEQ_101`` and ``SEQ_011``, the overlapping sequence detection doesn't occur.
+- due to the state transition to IDLE during ``inp_bit=0`` for both the cases of ``SEQ_101`` and ``SEQ_011``, the overlapping sequence detection doesn't occur.
 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
