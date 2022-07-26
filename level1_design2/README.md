@@ -23,30 +23,33 @@ dut.reset.value = 0
 await FallingEdge(dut.clk)
  ```
  
-The values are assigned to the input ports as an array using 
+The values are assigned to the input ports as an array on every falling edge of system clock using 
 ```
-var = [1,0,1,0,1,1,0]
-for i in range(7):
-    in_bit = var[i]
-    print(in_bit)
-    dut.inp_bit.value = in_bit
+var = [0,1,0,1,0,1,1,0,1,1]
+count = 0
+for i in range(len(var)):
+   dut.inp_bit.value = var[i]
+   await FallingEdge(dut.clk)
 ```
+A count variable initialized to zero is used to keep track of the no. of sequences detected that is later used to check for the test fail/pass  
 
-The assert statement is used for comparing the multiplexer's outut to the expected value.
+The assert statement is used for comparing the output to the expected value.
 ```
-assert dut.seq_seen.value == 1, " Sequnece is present but not detected "
+assert count > 0, " Sequnece 1011 not detected "
 ```
 
 The following error is seen:
 ```
- assert dut.seq_seen.value == 1, " Sequence is present but not detected "
-                     AssertionError:  Sequence is present but not detected
+ assert count > 0, f"Sequence 1011 not detected"
+ AssertionError: Sequence 1011 not detected
 ```
 
+We obsereve that although the sequence 1011 is present in the array, the design in not capable of detecting it.
+
 ## Test Scenario
-- Test Inputs: var = [1,0,1,0,1,1,0]
-- Expected Output: seq_seen = 1
-- Observed Output in the DUT dut.seq_seen = 0
+- Test Inputs: var = [0,1,0,1,0,1,1,0,1,1]
+- Expected Output: count = 2
+- Observed Output count = 0
 
 Output mismatches for the above inputs proving that there is a design bug
 
