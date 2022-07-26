@@ -94,5 +94,6 @@ For the 1011 Sequence detector design,
 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
+![image](https://user-images.githubusercontent.com/80892311/181086734-06d14393-601b-4521-a8d6-f88a237625ed.png)
 
 The updated design is checked in as seq_detect_1011_fix.v
