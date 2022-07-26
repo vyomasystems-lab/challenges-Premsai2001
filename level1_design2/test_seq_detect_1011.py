@@ -19,17 +19,19 @@ async def test_seq_bug1(dut):
 
     # reset
     dut.reset.value = 1
-    await FallingEdge(dut.clk)  
+    await Timer(10, units='ns')
     dut.reset.value = 0
     await FallingEdge(dut.clk)
 
     cocotb.log.info('#### CTB: Develop your test here! ######')
-    var = [0,0,1,0,1,1,0]
-    for i in range(7):
-        in_bit = var[i]
-        print(in_bit)
-        dut.inp_bit.value = in_bit
-
-    await Timer(2, units='ns')
-
-    assert dut.seq_seen.value == 1, "Sequence is pesent but not Detected" 
+    var = [0,1,0,1,0,1,1,0,1,1]
+    count = 0
+    for i in range(len(var)):
+        dut.inp_bit.value = var[i]
+        await FallingEdge(dut.clk)
+        if(dut.seq_seen.value==1): count= count +1
+        #dut._log.info(f"curr_state = {dut.current_state.value}")
+        #dut._log.info(f"next_state = {dut.next_state.value}")
+    assert count>0, f"output not detected"
+    print(count)
+    
