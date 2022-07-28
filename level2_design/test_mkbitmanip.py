@@ -37,9 +37,9 @@ def run_test(dut):
     var_hex = [0x401070B3, 0x401060B3, 0x401040B3, 0x201010B3, 0x201050B3, 0x601010B3, 0x601050B3, 0x481010B3, 0x281010B3, 0x681010B3,
     0x481050B3, 0x281050B3, 0x681050B3, 0x20101093, 0x20105093, 0x60105093, 0x48101093, 0x28101093, 0x68101093, 0x48105093, 0x28105093,
     0x68105093, 0x061010B3, 0x061050B3, 0x041010B3, 0x041050B3]
-    mav_putvalue_src1 = 0x5
-    mav_putvalue_src2 = 0x0
-    mav_putvalue_src3 = 0x0
+    mav_putvalue_src1 = 0xB21345AD
+    mav_putvalue_src2 = 0x6AEF12C4
+    mav_putvalue_src3 = 0x223AD49C
     for i in range(26):
         mav_putvalue_instr = var_hex[i]
 
@@ -69,5 +69,6 @@ def run_test(dut):
             print(error_message)
         elif(dut_output == expected_mav_putvalue):
             print(pass_message)
+            
     print('no. of bugs = ',count)
     assert count == 0, f'FEW INSTRUCTIONS ARE BUGGY'
