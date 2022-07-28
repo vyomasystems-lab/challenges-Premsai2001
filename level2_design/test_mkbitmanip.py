@@ -69,5 +69,5 @@ def run_test(dut):
             print(error_message)
         elif(dut_output == expected_mav_putvalue):
             print(pass_message)
-    print(count)
+    print('no. of bugs = ',count)
     assert count == 0, f'FEW INSTRUCTIONS ARE BUGGY'
