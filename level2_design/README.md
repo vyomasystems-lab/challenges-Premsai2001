@@ -181,18 +181,3 @@ VALUE MATCHES IN DUT = 0x1a82a4797 WITH MODEL = 0x1a82a4797
 - Observed Output in the DUT: count = 1 
 
 Output mismatches for the above inputs proving that there is a design bug
-
-## Design Bug
-
-
-## Design Fix
-Updating the design and re-running the test makes the test pass.
-
-![image](https://user-images.githubusercontent.com/80892311/180613114-a5a5fac8-9a4d-46a9-b098-9884c0005bf8.png)
-
-The updated design is checked in as mux_fix.v
-
-## Verification Strategy
-
-## Is the verification complete ?
-
