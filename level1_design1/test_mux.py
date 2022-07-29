@@ -17,7 +17,7 @@ async def test_mux(dut):
     #test the design for all values of select
     for j in range(31):
         select = j
-        print('select=',select)
+        #print('select=',select)
         
         #DRIVE THE INPUTS TO DUT
         dut.inp0.value = in_val[0]
@@ -56,7 +56,7 @@ async def test_mux(dut):
         await Timer(2, units='ns')
         
         expected_val = in_val[select]
-        if(dut.out.value != expected_val):
+        if(int(dut.out.value) != expected_val):
             count = count + 1
-            dut._log.info(f'MUX result is incorrect: For select = {j} , out = {dut.out.value}, but expected value = {expected_val}')
-    assert count == 0, f'MUX DESIGN CONTAINS BUGS INDICATED BY THE ABOVE STATEMENTS'
+            dut._log.info(f'MUX result is incorrect: For select = {j} , out = {int(dut.out.value)}, but expected value = {expected_val}')
+    assert count == 0, f'MUX DESIGN {count} BUG/BUGS INDICATED BY THE ABOVE STATEMENTS'
