@@ -9,7 +9,7 @@ The verification environment is setup using [Vyoma's UpTickPro](https://vyomasys
 
 The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (mux module here) which takes in 31  2-bit inputs *in0* - *in30* and based on the value in the select line *sel*, which gives a 2-bit output *out*.
 
-The values are assigned to the input ports as an array using 
+Random values are assigned to the input ports as an array using 
 ```
     dut.inp0.value = in_val[0]
     dut.inp1.value = in_val[1]
@@ -33,8 +33,8 @@ assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out
                      AssertionError: MUX result is incorrect: For sel = 30 , out = 0, but expected value = 2
 ```
 ## Test Scenario
-- Test Inputs: in_val = [1, 2, 3, 0, 0, 1, 2, 2, 0, 3, 1, 2, 3, 1, 1, 2, 3, 0, 1, 0, 3, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2]; select = 12
-- Expected Output: out = 3
+- Test Inputs: in_val = [1, 2, 0, 0, 0, 2, 2, 3, 0, 2, 1, 3, 1, 1, 2, 1, 2, 0, 2, 2, 2, 3, 3, 2, 2, 3, 0, 3, 0, 0, 3]; select = 12
+- Expected Output: out = 1
 - Observed Output in the DUT dut.out=0
 
 - Test Inputs: in_val = [1, 2, 3, 0, 0, 1, 2, 2, 0, 3, 1, 2, 3, 1, 1, 2, 3, 0, 1, 0, 3, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2]; select = 30
@@ -67,7 +67,7 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
       5'b01001: out = inp9;  
       5'b01010: out = inp10;
       5'b01011: out = inp11;
-      5'b01101: out = inp12; ===> BUG
+      5'b01101: out = inp12; ===> BUG: invalid assignment
       5'b01101: out = inp13;
       5'b01110: out = inp14;
       5'b01111: out = inp15;
@@ -93,15 +93,10 @@ always @(sel or inp0  or inp1 or  inp2 or inp3 or inp4 or inp5 or inp6 or
 For the MUX design, 
 - the case statement for ``sel = 12`` should be ``5'b01100: out = inp12`` instead of ``5'b01101: out = inp12`` in the design code.
 - the case statement for ``sel = 30`` i.e ``5'b11110: out = inp30`` is missing in the design code.
-- 
+
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
 
 ![image](https://user-images.githubusercontent.com/80892311/180613114-a5a5fac8-9a4d-46a9-b098-9884c0005bf8.png)
 
 The updated design is checked in as mux_fix.v
-
-## Verification Strategy
-
-## Is the verification complete ?
-
