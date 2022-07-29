@@ -181,3 +181,5 @@ VALUE MATCHES IN DUT = 0x1a82a4797 WITH MODEL = 0x1a82a4797
 - Observed Output in the DUT: count = 1 
 
 Output mismatches for the above inputs proving that there is a design bug
+
+# Therefore, for the input ``` mav_putvalue_instr = 0x401070B3``` (i.e the```ANDN``` instruction), the design fails.
