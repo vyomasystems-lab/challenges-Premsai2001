@@ -73,4 +73,4 @@ def run_test(dut):
             print(pass_message)
 
     print('no. of bugs = ',count)
-    assert count == 0, f'FEW INSTRUCTIONS ARE BUGGY'
+    assert count == 0, f'The design consists of {count} bug/bugs as indicated by the above statements'
