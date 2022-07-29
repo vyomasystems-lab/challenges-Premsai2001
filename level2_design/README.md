@@ -72,9 +72,9 @@ A ```count``` variable initialized to zero is used to keep track of the no. of s
 
 The assert statement is used for comparing the ```count``` value to 0 indicating no bugs/ errors in the design.
 ```
-assert count == 0, f'FEW INSTRUCTIONS ARE BUGGY'
-                     AssertionError: FEW INSTRUCTIONS ARE BUGGY
-```                  
+assert count == 0, f'The design consists of {count} bug/bugs as indicated by the above statements'
+``` 
+
 ALso following is seen:
 ```
 --ANDN 1                                                     #instruction
@@ -163,6 +163,9 @@ VALUE MATCHES IN DUT = 0x1a82a4797 WITH MODEL = 0x1a82a4797
 VALUE MATCHES IN DUT = 0x1a82a4797 WITH MODEL = 0x1a82a4797
 
 ### NUMBER OF BUGS (COUNT) =  1 ###
+
+assert count == 0, f'The design consists of {count} bug/bugs as indicated by the above statements'
+AssertionError: The design consists of 1 bug/bugs as indicated by the above statements
 ```
 
 ## Test Scenario
@@ -180,6 +183,6 @@ VALUE MATCHES IN DUT = 0x1a82a4797 WITH MODEL = 0x1a82a4797
 - Expected Output: count = 0
 - Observed Output in the DUT: count = 1 
 
-Output mismatches for the above inputs proving that there is a design bug
+Output mismatches for the above inputs proving that there is a design bug.
 
-# Therefore, for the input ``` mav_putvalue_instr = 0x401070B3``` (i.e the```ANDN``` instruction), the design fails.
+# On analysis, for the input ``` mav_putvalue_instr = 0x401070B3``` (i.e the```ANDN``` instruction), the design fails.
