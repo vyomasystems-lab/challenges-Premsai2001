@@ -9,7 +9,22 @@ The verification environment is setup using [Vyoma's UpTickPro](https://vyomasys
 
 The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (mux module here) which takes in 31  2-bit inputs *in0* - *in30* and based on the value in the select line *sel*, which gives a 2-bit output *out*.
 
-Random values are assigned to the input ports as an array using 
+Input values are generated at random as shown:
+```
+#generate random inputs
+    in_val = []
+    for i in range(31):
+        x = random.randint(0,3)
+        in_val.append(x)
+```
+
+The select line value is generated as shown:
+```
+for j in range(31):
+        select = j
+```
+
+These input values are assigned to the input ports using 
 ```
     dut.inp0.value = in_val[0]
     dut.inp1.value = in_val[1]
@@ -20,28 +35,31 @@ Random values are assigned to the input ports as an array using
     dut.inp30.value = in_val[30]
     dut.sel.value = select
 ```
-
-The assert statement is used for comparing the multiplexer's outut to the expected value.
+A ```count``` variable initialized to zero is used to keep track of the no. of sequences detected that is later used to check for the test fail/pass.
+The assert statement is used for comparing the ```count``` value to 0 indicating no bugs/ errors in the design.
 
 The following errors are seen:
 ```
-assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out = {OUT}, but expected value = {exp}".format(
-                     AssertionError: MUX result is incorrect: For sel = 12 , out = 0, but expected value = 3
+[0, 2, 1, 1, 0, 2, 3, 3, 2, 0, 3, 3, 1, 1, 3, 0, 1, 1, 1, 3, 1, 0, 0, 0, 3, 1, 3, 3, 1, 3, 3]
+    28.00ns INFO     ERROR: MUX result is incorrect: For select = 12 , out = 0, but expected value = 1
+    62.00ns INFO     ERROR: MUX result is incorrect: For select = 30 , out = 0, but expected value = 3
+    62.00ns INFO     test_mux failed
 ```
-```
- assert dut.out.value == in_val[i], "MUX result is incorrect: For sel = {i} , out = {OUT}, but expected value = {exp}".format(
-                     AssertionError: MUX result is incorrect: For sel = 30 , out = 0, but expected value = 2
-```
+```              
+    assert count == 0, f'MUX DESIGN contains {count} BUG/BUGS INDICATED BY THE ABOVE STATEMENTS'
+    AssertionError: MUX DESIGN contains 2 BUG/BUGS INDICATED BY THE ABOVE STATEMENTS
+```                     
+
 ## Test Scenario
-- Test Inputs: in_val = [1, 2, 0, 0, 0, 2, 2, 3, 0, 2, 1, 3, 1, 1, 2, 1, 2, 0, 2, 2, 2, 3, 3, 2, 2, 3, 0, 3, 0, 0, 3]; select = 12
+- Test Inputs: in_val = [0, 2, 1, 1, 0, 2, 3, 3, 2, 0, 3, 3, 0, 1, 3, 0, 1, 1, 1, 3, 1, 0, 0, 0, 3, 1, 3, 3, 1, 3, 3]; select = 12
 - Expected Output: out = 1
 - Observed Output in the DUT dut.out=0
 
-- Test Inputs: in_val = [1, 2, 3, 0, 0, 1, 2, 2, 0, 3, 1, 2, 3, 1, 1, 2, 3, 0, 1, 0, 3, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2]; select = 30
-- Expected Output: out = 2
+- Test Inputs: in_val = [0, 2, 1, 1, 0, 2, 3, 3, 2, 0, 3, 3, 0, 1, 3, 0, 1, 1, 1, 3, 1, 0, 0, 0, 3, 1, 3, 3, 1, 3, 3]; select = 30
+- Expected Output: out = 3
 - Observed Output in the DUT dut.out=0
 
-Output mismatches for the above inputs proving that there is a design bug
+Output mismatches for the above inputs proving that there is a design bug.
 
 ## Design Bug
 Based on the above test input and analysing the design, we see the following
