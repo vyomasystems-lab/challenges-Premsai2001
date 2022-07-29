@@ -71,9 +71,11 @@ The values are assigned to the input ports as an array using
 A ```count``` variable initialized to zero is used to keep track of the no. of sequences detected that is later used to check for the test fail/pass.
 
 The assert statement is used for comparing the ```count``` value to 0 indicating no bugs/ errors in the design.
-
-However,
-The following is seen:
+```
+assert count == 0, f'FEW INSTRUCTIONS ARE BUGGY'
+                     AssertionError: FEW INSTRUCTIONS ARE BUGGY
+```                  
+ALso following is seen:
 ```
 --ANDN 1                                                     #instruction
 VALUE MISMATCH IN DUT = 0x44060109 WITH MODEL = 0x120208a53  #DUT output V/s Model output
